@@ -1,0 +1,8 @@
+//Checks to team Jack
+//Loosely couple swing components
+//Maze Begin/End
+//Maze Solver
+//Load program on to Galaxy S3
+//Display and run on Android
+//Build compass on Android
+//Sophisticated State Machine for Robot

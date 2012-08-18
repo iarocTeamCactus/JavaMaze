@@ -1,0 +1,15 @@
+Review Objects in Maze
+Review Interface
+Review creating an object out of an interface  (create a new PossibleWall class)
+    Note Singleton UndefinedMazePiece
+Review creating the SimpleMaze class (map out the maze)
+Draw the maze
+    Create JFrame
+    Create JPanel
+    Include Width, Height, and Color getters and setters in MazePiece interface.
+    Add getters and setters to all implementations
+    Create CenteredRectangle
+    Recursion to draw the 
+
+
+
