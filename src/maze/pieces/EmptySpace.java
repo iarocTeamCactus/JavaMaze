@@ -4,6 +4,7 @@
  */
 package maze.pieces;
 
+import maze.MazeGridLocation;
 import java.awt.Color;
 import maze.Direction;
 import maze.MazeConstants;
@@ -12,12 +13,14 @@ import maze.MazeConstants;
  *
  * @author Rob
  */
-public class EmptySpace implements MazePiece{
-    
-    MazePiece north = UndefinedMazePiece.getInstance(), 
-              south = UndefinedMazePiece.getInstance(),
-              east  = UndefinedMazePiece.getInstance(), 
-              west  = UndefinedMazePiece.getInstance();
+public class EmptySpace implements MazePiece {
+
+    MazePiece north = UndefinedMazePiece.getInstance(),
+            south = UndefinedMazePiece.getInstance(),
+            east = UndefinedMazePiece.getInstance(),
+            west = UndefinedMazePiece.getInstance();
+    MazeGridLocation location;
+    Color color = Color.LIGHT_GRAY;
 
     public EmptySpace() {
         System.out.println("creating EmptySpace");
@@ -95,7 +98,7 @@ public class EmptySpace implements MazePiece{
             throw new IndexOutOfBoundsException("a direction " + direction + " does not map to NORTH SOUTH EAST WEST");
         }
     }
-    
+
     @Override
     public double getWidth() {
         return 24.0;
@@ -108,7 +111,19 @@ public class EmptySpace implements MazePiece{
 
     @Override
     public Color getColor() {
-        return Color.LIGHT_GRAY;
+        return color;
     }
-    
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setGridLocation(MazeGridLocation loc) {
+        location = loc;
+    }
+
+    public MazeGridLocation getGridLocation() {
+        return location;
+    }
 }

@@ -18,7 +18,8 @@ public class RunsNorthSouthWall implements MazePiece, Wall {
             south = UndefinedMazePiece.getInstance(),
             east = UndefinedMazePiece.getInstance(),
             west = UndefinedMazePiece.getInstance();
-
+    Color color = Color.WHITE;
+    
     public RunsNorthSouthWall() {
         System.out.println("creating RunsNorthSouthWall");
 
@@ -109,6 +110,11 @@ public class RunsNorthSouthWall implements MazePiece, Wall {
 
     @Override
     public Color getColor() {
-        return Color.WHITE;
+        return color;
+    }
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

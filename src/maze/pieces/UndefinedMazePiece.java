@@ -36,6 +36,11 @@ public class UndefinedMazePiece implements MazePiece{
         throw new UnsupportedOperationException("You have somehow wandered out of the maze trying to getColor().  This is an undefined Maze Piece.");
     }
 
+    @Override
+    public void setColor(Color color) {
+        throw new UnsupportedOperationException("You have somehow wandered out of the maze trying to setColor().  This is an undefined Maze Piece.");
+    }
+    
     private static class UndefinedMazePieceHolder {
 
         private static final UndefinedMazePiece INSTANCE = new UndefinedMazePiece();

@@ -15,6 +15,7 @@ import maze.MazeConstants;
 public class BeaconWall implements MazePiece, Wall {
 
     MazePiece beaconwall = new RunsEastWestWall();
+    Color color = Color.RED;
 
     @Override
     public MazePiece getNorth() {
@@ -101,6 +102,11 @@ public class BeaconWall implements MazePiece, Wall {
 
     @Override
     public Color getColor() {
-        return Color.RED;
+        return color;
+    }
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
