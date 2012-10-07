@@ -270,5 +270,10 @@ public class MazePieceTest {
         public Color getColor() {
             return null;
         }
+
+        @Override
+        public void setColor(Color color) {
+            Color c = color;
+        }
     }
 }

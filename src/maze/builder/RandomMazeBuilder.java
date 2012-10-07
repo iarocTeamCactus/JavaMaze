@@ -30,6 +30,8 @@ public class RandomMazeBuilder extends Observable {
     Random randomDirectionGenerator = new Random();
     Random randomPieceGenerator = new Random();
     EmptySpace northWestPiece, northEastPiece, southWestPiece, southEastPiece;
+    private EmptySpace southPiece;
+    private EmptySpace northPiece;
 
     private String keyFromXY(int x, int y) {
         return x + " " + y;
@@ -54,6 +56,9 @@ public class RandomMazeBuilder extends Observable {
         northEastPiece = (EmptySpace) startingPiece;
         southWestPiece = (EmptySpace) startingPiece;
         southEastPiece = (EmptySpace) startingPiece;
+        northPiece     = (EmptySpace) startingPiece;
+        southPiece     = (EmptySpace) startingPiece;
+        
         System.out.println(OPENSPACES - emptySpaceCount + " spaces used.");
 
         // Build the maze
@@ -172,6 +177,8 @@ public class RandomMazeBuilder extends Observable {
         setNorthEastPiece(currentPiece);
         setSouthWestPiece(currentPiece);
         setSouthEastPiece(currentPiece);
+        setNorthPiece(currentPiece);
+        setSouthPiece(currentPiece);
     }
 
     private void setNorthWestPiece(EmptySpace currentPiece) {
@@ -198,6 +205,18 @@ public class RandomMazeBuilder extends Observable {
         }
     }
 
+    private void setSouthPiece(EmptySpace currentPiece) {
+        if (currentPiece.getGridLocation().southDistance() >= southPiece.getGridLocation().southDistance()) {
+            southPiece = currentPiece;
+        }
+    }
+
+    private void setNorthPiece(EmptySpace currentPiece) {
+        if (currentPiece.getGridLocation().northDistance() >= northPiece.getGridLocation().northDistance()) {
+            northPiece = currentPiece;
+        }
+    }
+
     public EmptySpace getNorthWestPiece() {
         return northWestPiece;
     }
@@ -215,18 +234,20 @@ public class RandomMazeBuilder extends Observable {
     }
 
     public EmptySpace getSouthMostPiece() {
-        if (southWestPiece.getGridLocation().additiveSouthWestDistance() >= southEastPiece.getGridLocation().additiveSouthEastDistance()) {
-            return southWestPiece;
-        } else {
-            return southEastPiece;
-        }
+        return southPiece;
+//        if (southWestPiece.getGridLocation().additiveSouthWestDistance() >= southEastPiece.getGridLocation().additiveSouthEastDistance()) {
+//            return southWestPiece;
+//        } else {
+//            return southEastPiece;
+//        }
     }
 
     public EmptySpace getNorthMostPiece() {
-        if (northWestPiece.getGridLocation().additiveNorthWestDistance() >= northEastPiece.getGridLocation().additiveNorthEastDistance()) {
-            return northWestPiece;
-        } else {
-            return northEastPiece;
-        }
+        return northPiece;
+//        if (northWestPiece.getGridLocation().additiveNorthWestDistance() >= northEastPiece.getGridLocation().additiveNorthEastDistance()) {
+//            return northWestPiece;
+//        } else {
+//            return northEastPiece;
+//        }
     }
 }

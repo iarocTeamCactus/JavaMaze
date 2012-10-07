@@ -39,4 +39,11 @@ public class MazeGridLocation {
         return  x +  y;
     }
     
+    public int southDistance() {
+        return y;
+    }
+    
+    public int northDistance() {
+        return -y;
+    }
 }
