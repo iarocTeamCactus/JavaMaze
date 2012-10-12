@@ -106,5 +106,5 @@ public interface MazeConstants {
         }
     };
     final static List<Direction> DIRECTIONS = 
-            new ArrayList<>(Arrays.asList(NORTH, SOUTH, EAST, WEST));
+            new ArrayList<>(Arrays.asList(NORTH, EAST, SOUTH, WEST));
 }

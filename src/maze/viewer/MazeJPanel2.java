@@ -15,6 +15,7 @@ import maze.pieces.EmptySpace;
 import maze.pieces.MazePiece;
 import maze.pieces.UndefinedMazePiece;
 import maze.pieces.Wall;
+import maze.solver.MazeSolver;
 
 /**
  *
@@ -23,14 +24,19 @@ import maze.pieces.Wall;
 public class MazeJPanel2 extends javax.swing.JPanel {
 
     private Set<MazePiece> drawnPieces = new HashSet<>();
-    private MazePiece startingPiece;
+    private MazePiece middlePiece;
     /**
      * Creates new form MazeJPanel2
      */
     public MazeJPanel2() {
         initComponents();
         RandomMazeBuilder rmb = new RandomMazeBuilder();
-        startingPiece = rmb.buildRandomMaze();
+        middlePiece = rmb.buildRandomMaze();
+        MazePiece startingSpot = rmb.getSouthMostPiece();
+        MazeSolver solver = new MazeSolver();
+        solver.solveMaze(startingSpot, (new HashSet<MazePiece>()));
+        solver.highlightSolution();
+        
     }
 
     private void drawMaze(MazePiece currentPiece, double x, double y, Graphics2D g2) {
@@ -117,17 +123,17 @@ public class MazeJPanel2 extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         drawnPieces.clear();
-        drawMaze(startingPiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formComponentShown
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         drawnPieces.clear();
-        drawMaze(startingPiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formMouseClicked
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         drawnPieces.clear();
-        drawMaze(startingPiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,11 +10,11 @@ public class SolutionPiece extends EmptySpace{
     
     Direction direction;
     
-    SolutionPiece() {
+    public SolutionPiece() {
         super();
     }
     
-    SolutionPiece(Direction direction) {
+    public SolutionPiece(Direction direction) {
         this.direction = direction;
     }
     
