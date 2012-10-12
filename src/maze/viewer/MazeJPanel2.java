@@ -4,6 +4,7 @@
  */
 package maze.viewer;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.HashSet;
@@ -121,19 +122,25 @@ public class MazeJPanel2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    @Override
+    public void paint(Graphics g){
         drawnPieces.clear();
-        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+        // drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)g/*JFrame graphics*/);
+    }
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+//        drawnPieces.clear();
+//        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formComponentShown
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        drawnPieces.clear();
-        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+//        drawnPieces.clear();
+//        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formMouseClicked
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        drawnPieces.clear();
-        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
+//        drawnPieces.clear();
+//        drawMaze(middlePiece, getWidth()/2.0, getHeight()/2.0, (Graphics2D)this.getParent().getGraphics()/*JFrame graphics*/);
     }//GEN-LAST:event_formComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
