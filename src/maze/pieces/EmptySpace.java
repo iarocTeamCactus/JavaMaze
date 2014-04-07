@@ -101,12 +101,12 @@ public class EmptySpace implements MazePiece {
 
     @Override
     public double getWidth() {
-        return 24.0;
+        return 36.0;
     }
 
     @Override
     public double getHeight() {
-        return 24.0;
+        return 36.0;
     }
 
     @Override

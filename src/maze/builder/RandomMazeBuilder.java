@@ -6,6 +6,8 @@ package maze.builder;
 
 import java.awt.Color;
 import maze.pieces.EmptySpace;
+import maze.pieces.MazePiece;
+
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,6 +22,8 @@ import maze.pieces.*;
  * @author Rob.Erwin@gmail.com
  */
 public class RandomMazeBuilder extends Observable {
+	
+	// This is one of the 
 
     private final static int LENGTH = 10;
     private final static int WIDTH = 10;
@@ -32,16 +36,21 @@ public class RandomMazeBuilder extends Observable {
     EmptySpace northWestPiece, northEastPiece, southWestPiece, southEastPiece;
     private EmptySpace southPiece;
     private EmptySpace northPiece;
+    private MazePiece startingPiece;
+	private MazePiece mCurrentPiece;
 
     private String keyFromXY(int x, int y) {
         return x + " " + y;
     }
 
-    public MazePiece buildRandomMaze() {
+    public MazePiece getCurrentPiece() {
+		return mCurrentPiece;
+	}
+
+	public MazePiece buildRandomMaze() {
 
         // Builds a Random Maze using a HashMap to ensure no duplicate pieces
-        MazePiece startingPiece = new EmptySpace() {
-
+        startingPiece = new EmptySpace() {
             @Override
             public Color getColor() {
                 return Color.ORANGE;
@@ -72,12 +81,23 @@ public class RandomMazeBuilder extends Observable {
 
         return startingPiece;
     }
+    
+    public MazePiece getStartingPiece() {
+    	System.out.println("RandomMazeBuilder.getStartingPiece");
+    	return startingPiece;
+    }
 
     MazePiece buildRandomMaze(MazePiece currentPiece, int x, int y) {
 
         if (usedMazePositions.containsKey(keyFromXY(x, y)) && currentPiece instanceof EmptySpace) {
             System.out.println("Already put down piece" + x + " " + y);
         } else {
+        	try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             if (currentPiece instanceof EmptySpace) {
                 //add the current EmptySpace to the list of usedMazePositions
                 usedMazePositions.put(keyFromXY(x, y), currentPiece);
@@ -85,6 +105,7 @@ public class RandomMazeBuilder extends Observable {
                 loc.setLocation(x, y);
                 ((EmptySpace) currentPiece).setGridLocation(loc);
                 markBeginEnd((EmptySpace) currentPiece);
+            	mCurrentPiece = currentPiece;
             }
 
             // apply something to all four sides of the currentPiece
@@ -128,7 +149,7 @@ public class RandomMazeBuilder extends Observable {
         MazePiece returnPiece;
 
         if (emptySpaceCount > 0) {
-            if (randomPieceGenerator.nextDouble() < .58 /*
+            if (randomPieceGenerator.nextDouble() < .58 /* .58
                      * 1.0 / MazeConstants.GOLDENRATIO
                      */) {  //61.8%
                 //build a wall
@@ -169,7 +190,7 @@ public class RandomMazeBuilder extends Observable {
     @Override
     public void addObserver(Observer o) {
         super.addObserver(o);
-        System.out.println("Added Observer" + o);
+        System.out.println("Added Observer " + o + " to " + this);
     }
 
     private void markBeginEnd(EmptySpace currentPiece) {

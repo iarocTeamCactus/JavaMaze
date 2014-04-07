@@ -4,12 +4,16 @@
  */
 package maze.viewer;
 
+import maze.controller.MazeController;
+import maze.pieces.MazePiece;
+
 /**
  *
  * @author Rob.Erwin@gmail.com
  */
 public class MazeJFrame2 extends javax.swing.JFrame {
 
+	static MazeJFrame2 me;
     /**
      * Creates new form MazeJFrame2
      */
@@ -92,11 +96,35 @@ public class MazeJFrame2 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new MazeJFrame2().setVisible(true);
+            	
+                me = new MazeJFrame2();
+                me.setVisible(true);
             }
         });
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new MazeController(me);
+            }
+        });
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private maze.viewer.MazeJPanel2 mazeJPanel21;
     // End of variables declaration//GEN-END:variables
+	public void setStartingPiece(MazePiece firstPiece) {
+		System.out.println("MazeJFrame.setStartingPiece " + firstPiece);	
+		if (mazeJPanel21 != null)
+			mazeJPanel21.setStartingPiece(firstPiece);
+		
+	}
+
+	public void setEastWestSize(int i) {
+		mazeJPanel21.setEastWestSize(i);
+	}
+
+	public void setNorthSouthSize(int i) {
+		mazeJPanel21.setNorthSouthSize(i);		
+	}
 }

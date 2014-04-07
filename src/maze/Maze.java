@@ -5,6 +5,13 @@
 package maze;
 
 import java.util.HashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import maze.builder.RandomMazeBuilder;
+import maze.controller.MazeController;
+import maze.viewer.MazeJFrame2;
 
 /**
  *
@@ -29,6 +36,30 @@ public class Maze {
         System.out.println(hm.get(i));
         System.out.println(hm.get(j));
         
+        final MazeJFrame2 mjf2 = new MazeJFrame2();
+        //TODO: What is the model?
+        final MazeController controller = new MazeController(mjf2);
+        
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                mjf2.setVisible(true);
+//                controller.start();
+            }
+        });
+        
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.execute(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("controller.start");
+				controller.start();
+			}
+		});
+
     }
     
     public static String returnString(int x, int y){
