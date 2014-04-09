@@ -127,4 +127,22 @@ public class MazeJFrame2 extends javax.swing.JFrame {
 	public void setNorthSouthSize(int i) {
 		mazeJPanel21.setNorthSouthSize(i);		
 	}
+
+	public void setWestMostLoc(int westMost) {
+		mazeJPanel21.setWestMostLoc(westMost);
+	}
+
+	public void setNorthMostLoc(int northMost) {
+		mazeJPanel21.setNorthMostLoc(northMost);
+	}
+
+	public void setSouthMostLoc(int southMost) {
+		mazeJPanel21.setSouthMostLoc(southMost);
+	}
+
+	public void setEastMostLoc(int eastMost) {
+		mazeJPanel21.setEastMostLoc(eastMost);
+	}
+	
+
 }

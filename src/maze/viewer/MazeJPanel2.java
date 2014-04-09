@@ -10,6 +10,8 @@ import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.Set;
 
+import sun.java2d.loops.DrawRect;
+
 import maze.Direction;
 import maze.MazeConstants;
 import maze.builder.RandomMazeBuilder;
@@ -32,6 +34,7 @@ public class MazeJPanel2 extends javax.swing.JPanel {
 	private double mScale;
 	private int mEastWestSize;
 	private int mNorthSouthSize;
+	private int mNorthMostLoc, mSouthMostLoc, mEastMostLoc, mWestMostLoc;
 
 	/**
 	 * Creates new form MazeJPanel2
@@ -161,11 +164,25 @@ public class MazeJPanel2 extends javax.swing.JPanel {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		super.paint(g2);
+//		g2.drawRect(0,0,(int)mMiddlePiece.getWidth(),(int)mMiddlePiece.getHeight());
+//		g2.drawRect(getWidth()-(int)mMiddlePiece.getWidth(), getHeight()- (int)mMiddlePiece.getHeight(), (int)mMiddlePiece.getWidth(), (int)mMiddlePiece.getHeight());
+		g2.drawRect(getWidth()/2-(int)mMiddlePiece.getWidth()/2, getHeight()/2-(int)mMiddlePiece.getHeight()/2, (int)mMiddlePiece.getWidth(), (int)mMiddlePiece.getHeight());
 		calculateScale();
 		calculateTranslate();
 		g2.translate(getWidth() * .5, getHeight() * .5);
 		g2.scale(mScale, mScale);
+		if ( mMiddlePiece != null ) {
+//			System.out.println(mEastMostLoc + " " + mWestMostLoc + " " + mSouthMostLoc + " " + mNorthMostLoc);
+			double transX, transY;
+			transX = ( -1.0 * ( ( mEastMostLoc  - mWestMostLoc  + 1.0) / 2.0 + mWestMostLoc  ) + .5 ) * mMiddlePiece.getWidth();
+			transY = ( -1.0 * ( ( mSouthMostLoc - mNorthMostLoc + 1.0) / 2.0 + mNorthMostLoc ) + .5 ) * mMiddlePiece.getHeight();
+//			System.out.println(transX + " " + transY);
+			g2.translate(transX, transY);
+		}
 		drawnPieces.clear();
+//		g2.drawRect(0,0,(int)mMiddlePiece.getWidth(),(int)mMiddlePiece.getHeight());
+//		g2.drawRect(getWidth()-(int)mMiddlePiece.getWidth(), getHeight()- (int)mMiddlePiece.getHeight(), (int)mMiddlePiece.getWidth(), (int)mMiddlePiece.getHeight());
+		g2.drawRect(getWidth()/2-(int)mMiddlePiece.getWidth()/2, getHeight()/2-(int)mMiddlePiece.getHeight()/2, (int)mMiddlePiece.getWidth(), (int)mMiddlePiece.getHeight());
 
 		drawMaze(mMiddlePiece, 0, 0,
 				g2/* JFrame graphics */);
@@ -181,12 +198,12 @@ public class MazeJPanel2 extends javax.swing.JPanel {
 
 	private void calculateScale() {
 		if (mMiddlePiece != null) {
-			mScale = (double)this.getHeight() / ( (double)mNorthSouthSize * (double)mMiddlePiece.getHeight() * 2.0 )
-					* .8;
-			mScale = Math.min(mScale, (double)this.getWidth() / ((double)mEastWestSize * (double)mMiddlePiece.getWidth() * 2.0)
-					* .8);
-			System.out.println(mNorthSouthSize + " " + mMiddlePiece.getHeight()+ " " + this.getHeight());
-			System.out.println(mScale);
+			mScale = (double)this.getHeight() / ( (double)mNorthSouthSize * (double)mMiddlePiece.getHeight() * 1.0 )
+					* .90;
+			mScale = Math.min(mScale, (double)this.getWidth() / ((double)mEastWestSize * (double)mMiddlePiece.getWidth() * 1.0)
+					* .90);
+//			System.out.println(mEastWestSize + " " + mNorthSouthSize + " " + mMiddlePiece.getHeight()+ " " + this.getHeight());
+//			System.out.println(mScale);
 		}
 	}
 
@@ -222,6 +239,22 @@ public class MazeJPanel2 extends javax.swing.JPanel {
 		calculateScale();
 	}
 
+	public void setNorthMostLoc(int northMostLoc) {
+		mNorthMostLoc = Math.min(mNorthMostLoc, northMostLoc);
+	}
+	
+	public void setSouthMostLoc(int southMostLoc) {
+		mSouthMostLoc = Math.max(mSouthMostLoc, southMostLoc);
+	}
+
+	public void setEastMostLoc(int eastMostLoc) {
+		mEastMostLoc = Math.max(mEastMostLoc, eastMostLoc);
+	}
+
+	public void setWestMostLoc(int westMostLoc) {
+		 mWestMostLoc = Math.min(mWestMostLoc, westMostLoc);
+	}
+	
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	// End of variables declaration//GEN-END:variables
 }

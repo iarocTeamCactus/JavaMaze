@@ -63,24 +63,31 @@ public class MazeController implements Observer{
 	}
 	
 	private void setWestMost() {
-		if (couldResizeMaze(mCurrentPiece))
+		if (couldResizeMaze(mCurrentPiece)) {
 			mWestMost = Math.min(mWestMost, ((EmptySpace)mCurrentPiece).getGridLocation().getXLocation());
+			mMazeJFrame.setWestMostLoc(mWestMost);
+		}
 	}
 
 	private void setNorthMost() {
-		if (couldResizeMaze(mCurrentPiece))
+		if (couldResizeMaze(mCurrentPiece)) {
 			mNorthMost = Math.min(mNorthMost, ((EmptySpace)mCurrentPiece).getGridLocation().getYLocation());
+			mMazeJFrame.setNorthMostLoc(mNorthMost);
+		}
 	}
 
 	private void setSouthMost() {
-		if (couldResizeMaze(mCurrentPiece))
+		if (couldResizeMaze(mCurrentPiece)) {
 			mSouthMost = Math.max(mSouthMost, ((EmptySpace)mCurrentPiece).getGridLocation().getYLocation());
+			mMazeJFrame.setSouthMostLoc(mSouthMost);
+		}
 	}
 
 	private void setEastMost() {
-		if (couldResizeMaze(mCurrentPiece))
+		if (couldResizeMaze(mCurrentPiece)) {
 			mEastMost = Math.max(mEastMost, ((EmptySpace)mCurrentPiece).getGridLocation().getXLocation());
-		// TODO Auto-generated method stub
+			mMazeJFrame.setEastMostLoc(mEastMost);
+		}
 	}
 	
 	public void sendEastWestSize() {
